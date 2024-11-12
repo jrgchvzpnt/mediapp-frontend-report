@@ -1,0 +1,75 @@
+<form [formGroup]="form" class="example-container" (submit)="operate()">
+
+    <div [hidden]="true">
+        <mat-form-field>
+            <input matInput placeholder="ID" required formControlName="idPatient">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field>
+        <input matInput placeholder="FirstName" required formControlName="firstName">
+        @if(f['firstName'].errors?.['required'] && f['firstName'].touched){
+            <small class="invalid">The firstname Is required</small>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="LastName" required formControlName="lastName">
+        @if(f['lastName'].errors?.['required'] && f['lastName'].touched){
+            <small class="invalid">The lastname Is required</small>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="DNI" required formControlName="dni">
+        @if(f['dni'].errors?.['required'] && f['dni'].touched){
+            <small class="invalid">The DNI Is required</small>
+        }
+        @if(f['dni'].errors?.['minlength'] && f['dni'].touched){
+            <small class="invalid">The minlength Is 3</small>
+        }
+        @if(f['dni'].errors?.['maxlength'] && f['dni'].touched){
+            <small class="invalid">The maxlength Is 8</small>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Address" required formControlName="address">
+        @if(f['address'].errors?.['required'] && f['address'].touched){
+            <small class="invalid">The DNI Is required</small>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Phone" required formControlName="phone">
+        @if(f['phone'].errors?.['required'] && f['phone'].touched){
+            <small class="invalid">The Phone Is required</small>
+        }
+        @if(f['phone'].errors?.['minlength'] && f['phone'].touched){
+            <small class="invalid">The minlength Is 3</small>
+        }
+        @if(f['phone'].errors?.['maxlength'] && f['phone'].touched){
+            <small class="invalid">The maxlength Is 9</small>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Email" required formControlName="email">
+        @if(f['email'].errors?.['required'] && f['email'].touched){
+            <small class="invalid">The email Is required</small>
+        }
+        @if(f['email'].errors?.['email'] && f['email'].invalid){
+            <small class="invalid">Email invalid</small>
+        }
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/patient">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+</form>

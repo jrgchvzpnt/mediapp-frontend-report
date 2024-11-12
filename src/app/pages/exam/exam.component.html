@@ -1,0 +1,50 @@
+<router-outlet />
+
+<div [hidden]="checkchildren()">
+    <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+        <ng-container matColumnDef="idExam">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID. </th>
+            <td mat-cell *matCellDef="let element"> {{element.idExam}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.nameExam}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.descriptionExam}} </td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-button color="primary" [routerLink]="['edit', element.idExam]">
+                    <mat-icon>mode_edit</mat-icon>
+                </button>
+
+                <button mat-button color="accent" (click)="delete(element.idExam)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+        <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5,10, 25, 100]" aria-label="Select page of exams"></mat-paginator>
+
+    <button mat-fab color="primary" style="float: right;" routerLink="/pages/exam/new">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
